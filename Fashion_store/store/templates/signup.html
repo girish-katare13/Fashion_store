@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+{% block header %}{% endblock header %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-5">User Creation Form</h2>
+  <form action="{{signup}}" method="post" novalidate>
+    {% csrf_token %}
+    
+    {% for non_field_error in form.non_field_errors  %}
+        <div class="alert alert-danger"> 
+            {{ non_field_error }}
+        </div>
+    {% endfor %}
+    <div class="form-group">
+      {% for field in form  %}
+        {{form.field.help_text}}
+        <label for="exampleInputAddress1" >{{field.label}}</label> 
+        {{field}}
+        <p class="danger text-center ">{{field.errors}}</p>
+        <br>
+      {% endfor %}
+      
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock content %}
+
